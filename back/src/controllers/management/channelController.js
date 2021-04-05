@@ -24,12 +24,12 @@ module.exports.createChannel = async (req, res, next) => {
     const serverData = await Servers.findByPk(server_id).catch((e) => {
       throw new Error(e);
     });
-
-    if (!Object.keys(serverData).length) {
+    if (!serverData) {
       return res.status(400).json({
         message: "server not found",
       });
     }
+
     if (!serverData.user_id === userData.id) {
       return res.status(400).json({
         message: "not match server created user",

@@ -15,21 +15,20 @@ export default {
   data() {
     return {
       rules: [
-        v => !!v || "",
-        v => /.+@.+\..+/.test(v) || "",
-        value => !!value || "必ず入力してください"
-      ]
+        (v) => /.+@.+\..+/.test(v) || "",
+        (value) => !!value || "必ず入力してください",
+      ],
     };
   },
   props: {
     email: {
       type: String,
-      default: ""
+      default: "",
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     setEmail: {
@@ -38,8 +37,8 @@ export default {
       },
       set(newVal) {
         return this.$emit("update:email", newVal);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

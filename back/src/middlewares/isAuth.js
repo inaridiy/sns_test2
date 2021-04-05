@@ -3,6 +3,11 @@ const { jwtconfig } = require("../config/config"),
 
 module.exports.isAuth = async function (req, res, next) {
   const bearToken = req.headers["authorization"];
+  if (!bearToken) {
+    return res.status(400).json({
+      message: "need login",
+    });
+  }
   const bearer = bearToken.split(" ");
   const token = bearer[1];
   jwt.verify(token, jwtconfig.secretKey, (err, user) => {

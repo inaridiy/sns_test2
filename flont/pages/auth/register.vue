@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <form-card title="登録">
-      <v-form>
+      <v-form ref="form">
         <email-input :email.sync="user.email" :disabled="disabled" />
         <name-input :name.sync="user.name" :disabled="disabled" />
         <id-input :id.sync="user.id" :disabled="disabled" />
@@ -50,13 +50,8 @@ export default {
     async submit() {
       const user = this.user;
       this.disabled = true;
-      if (!user.email || !user.id || !user.name || !user.password) {
-        this.disabled = false;
-        this.error = "すべての欄に入力してね";
-        return;
-      }
 
-      this.$axios
+      /* this.$axios
         .post("/auth/register", this.user)
         .then(response => {
           this.$auth.loginWith("local", {
@@ -67,7 +62,8 @@ export default {
           this.error = "既に登録されているidまたはemailです。";
           this.disabled = false;
           return;
-        });
+        });*/
+      console.log(this.$refs.form.validate());
     }
   }
 };

@@ -10,6 +10,12 @@ module.exports = (sequelize) => {
       onUpdate: "cascade",
       onDelete: "cascade",
     },
+    media_id: {
+      type: Sequelize.INTEGER,
+      references: { model: "media", key: "id" }, // 外部キー
+      onUpdate: "cascade",
+      onDelete: "cascade",
+    },
     user_id: {
       type: Sequelize.STRING,
       references: { model: "users", key: "id" }, // 外部キー

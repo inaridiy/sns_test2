@@ -1,19 +1,20 @@
 const Sequelize = require("sequelize");
 
 module.exports = (sequelize) => {
-  const Medias = sequelize.define("media", {
+  const Media = sequelize.define("media", {
     id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-    path: { type: Sequelize.STRING },
+    path: { type: Sequelize.STRING, allowNull: false },
     type: { type: Sequelize.STRING },
     user_id: {
       type: Sequelize.STRING,
+      allowNull: false,
       references: { model: "users", key: "id" }, // 外部キー
       onUpdate: "cascade",
       onDelete: "cascade",
     },
   });
 
-  Medias.sync();
+  Media.sync();
 
-  return { Medias };
+  return { Media };
 };

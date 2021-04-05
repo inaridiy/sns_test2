@@ -13,6 +13,12 @@ module.exports = (sequelize) => {
         onUpdate: "cascade",
         onDelete: "cascade",
       },
+      icon: {
+        type: Sequelize.INTEGER,
+        references: { model: "users", key: "id" }, // 外部キー
+        onUpdate: "cascade",
+        onDelete: "cascade",
+      },
     },
     {
       scopes: {},

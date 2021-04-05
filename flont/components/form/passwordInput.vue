@@ -4,6 +4,7 @@
     @click:append="showPassword = !showPassword"
     v-model="setEmail"
     :disabled="disabled"
+    :rules="rules"
     prepend-icon="mdi-lock"
     append-icon="mdi-eye-off"
     label="パスワード"
@@ -13,18 +14,20 @@
 export default {
   data() {
     return {
-      showPassword: false
+      showPassword: false,
+      rules: [(value) => !!value || "必ず入力してください"],
     };
   },
+
   props: {
     password: {
       type: String,
-      default: ""
+      default: "",
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     setEmail: {
@@ -33,8 +36,8 @@ export default {
       },
       set(newVal) {
         return this.$emit("update:password", newVal);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

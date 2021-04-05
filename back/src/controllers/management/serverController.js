@@ -1,10 +1,13 @@
-const { Channels, Servers } = require("../../db/models");
+const { Channels, Servers, Belong, Users } = require("../../db/models");
 
 module.exports.getServerData = async (req, res, next) => {
   const { server_id } = req.query;
   try {
     const server = await Servers.findByPk(server_id, {
-      include: [{ model: Channels }],
+      include: [
+        { model: Channels },
+        { model: Belong, include: [{ model: Users }] },
+      ],
     });
     res.json(server);
   } catch (e) {
@@ -16,7 +19,9 @@ module.exports.createServer = async (req, res, next) => {
   const { name = "無名のサーバー" } = req.query,
     { id: user_id } = req.user;
   try {
-    await Servers.create({ name, user_id });
+    await Servers.create({ name, user_id }).catch((e) => {
+      throw new Error(e);
+    });
     return res.json({
       message: "create server successfully",
     });
@@ -43,5 +48,20 @@ module.exports.deleteChannel = async (req, res, next) => {
     return res.status(400).json({
       message: "not match channel created user",
     });
+  }
+};
+
+module.exports.updateServer = async (req, res, next) => {
+  const { server_id, name, icon } = req.query;
+  try {
+    await Servers.findByPk(server_id).then((server) => {
+      (server.name = name), (server.icon = icon);
+      server.save();
+    });
+    return res.json({
+      message: "update data ok",
+    });
+  } catch (e) {
+    next({ Stack: e, msg: "db error" });
   }
 };

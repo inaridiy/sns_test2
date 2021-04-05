@@ -2,6 +2,7 @@
   <v-text-field
     v-model="setEmail"
     :disabled="disabled"
+    :rules="rules"
     label="IDを入力"
     prepend-icon="mdi-identifier"
     placeholder="yourID"
@@ -10,15 +11,20 @@
 </template>
 <script>
 export default {
+  data() {
+    return {
+      rules: [(value) => !!value || "必ず入力してください"],
+    };
+  },
   props: {
     id: {
       type: String,
-      default: ""
+      default: "",
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     setEmail: {
@@ -27,8 +33,8 @@ export default {
       },
       set(newVal) {
         return this.$emit("update:id", newVal);
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>

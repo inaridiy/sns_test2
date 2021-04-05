@@ -26,7 +26,7 @@ export default {
     },
     async tweetPost() {
       console.log(await this.$axios.post("/tweet", { text: this.tweet.text }));
-    }
-  }
+    },
+  },
 };
 </script>
