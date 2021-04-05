@@ -50,8 +50,13 @@ export default {
     async submit() {
       const user = this.user;
       this.disabled = true;
+      if (!this.$refs.form.validate()) {
+        this.disabled = false;
+        this.error = "すべての欄に入力してね";
+        return;
+      }
 
-      /* this.$axios
+      this.$axios
         .post("/auth/register", this.user)
         .then(response => {
           this.$auth.loginWith("local", {
@@ -59,11 +64,10 @@ export default {
           });
         })
         .catch(e => {
-          this.error = "既に登録されているidまたはemailです。";
+          this.error = e.message;
           this.disabled = false;
           return;
-        });*/
-      console.log(this.$refs.form.validate());
+        });
     }
   }
 };
