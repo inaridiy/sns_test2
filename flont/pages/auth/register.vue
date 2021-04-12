@@ -26,14 +26,15 @@
 </template>
 
 <script>
-import emailInput from "../../components/form/emailInput.vue";
-import FormCard from "../../components/form/formCard.vue";
-import IdInput from "../../components/form/idInput.vue";
-import NameInput from "../../components/form/nameInput.vue";
-import PasswordInput from "../../components/form/passwordInput.vue";
+import emailInput from "~/components/form/emailInput.vue";
+import FormCard from "~/components/form/formCard.vue";
+import IdInput from "~/components/form/idInput.vue";
+import NameInput from "~/components/form/nameInput.vue";
+import PasswordInput from "~/components/form/passwordInput.vue";
 
 export default {
   components: { emailInput, PasswordInput, FormCard, NameInput, IdInput },
+  auth: "guest",
   data() {
     return {
       error: "",
@@ -64,7 +65,12 @@ export default {
           });
         })
         .catch(e => {
-          this.error = e.message;
+          console.log(e.response);
+          const message =
+            e.response.status === 400
+              ? "アカウントが既に存在しているか内容に不備があります"
+              : "不明なエラー";
+          this.error = message;
           this.disabled = false;
           return;
         });

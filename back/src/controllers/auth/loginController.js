@@ -33,7 +33,7 @@ module.exports.loginC = async function (req, res, next) {
   const payload = {
     id: userData.id,
     name: userData.name,
-    email: userData.email,
+    icon: userData.icon,
   };
   const token = jwt.sign(payload, jwtconfig.secretKey);
   return res.json({ token });

@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
     }
   );
 
-  Users.sync();
+  //Users.sync();
 
   return { Users };
 };

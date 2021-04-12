@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import emailInput from "../../components/form/emailInput.vue";
-import FormCard from "../../components/form/formCard.vue";
-import PasswordInput from "../../components/form/passwordInput.vue";
+import emailInput from "~/components/form/emailInput.vue";
+import FormCard from "~/components/form/formCard.vue";
+import PasswordInput from "~/components/form/passwordInput.vue";
 
 export default {
   components: { emailInput, PasswordInput, FormCard },

@@ -19,8 +19,12 @@ module.exports.createServer = async (req, res, next) => {
   const { name = "無名のサーバー" } = req.query,
     { id: user_id } = req.user;
   try {
-    await Servers.create({ name, user_id }).catch((e) => {
+    const server = await Servers.create({ name, user_id }).catch((e) => {
       throw new Error(e);
+    });
+    await Belong.create({
+      user_id,
+      server_id: server.id,
     });
     return res.json({
       message: "create server successfully",

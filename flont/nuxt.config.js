@@ -1,7 +1,6 @@
-import colors from "vuetify/es5/util/colors";
-
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  target: "static",
   head: {
     titleTemplate: "%s - flont",
     title: "flont",
@@ -17,7 +16,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "~/plugins/socket.js", ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -27,18 +26,20 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     "@nuxtjs/vuetify"
   ],
-
+  router: {
+    middleware: ["auth"]
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
     "@nuxtjs/pwa",
-    "@nuxtjs/auth"
+    "@nuxtjs/auth-next"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: { baseURL: "http://localhost:4000/" },
+  axios: { baseURL: process.env.API_URL || "http://localhost:4000" },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
@@ -47,6 +48,12 @@ export default {
     }
   },
   auth: {
+    redirect: {
+      login: "/auth/login",
+      logout: "/",
+      callback: "/auth/login",
+      home: "/channel"
+    },
     strategies: {
       local: {
         endpoints: {
@@ -62,5 +69,9 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {},
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || "http://locahost:3000",
+    apiURL: process.env.API_URL || "http://localhost:4000"
+  }
 };

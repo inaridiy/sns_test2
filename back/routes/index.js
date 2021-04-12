@@ -4,6 +4,7 @@ const express = require("express"),
 router.use("/auth", require("./auth"));
 router.use("/management", require("./management"));
 router.use("/media", require("./media"));
-router.post("/join", require("./join"));
-
+router.use("/join", require("./join"));
+router.use("/user", require("./user"));
+router.use("/msg", require("./message"));
 module.exports = router;

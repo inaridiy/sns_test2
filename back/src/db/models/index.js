@@ -20,7 +20,14 @@ const { Users } = require("./users")(sequelize),
 Servers.hasMany(Channels, { foreignKey: "server_id", sourceKey: "id" });
 Servers.hasMany(Belong, { foreignKey: "server_id", sourceKey: "id" });
 Belong.hasOne(Users, { foreignKey: "id", sourceKey: "user_id" });
-Messages.hasOne(Users, { foreignKey: "id", sourceKey: "user_id" });
+Belong.hasOne(Servers, { foreignKey: "id", sourceKey: "server_id" });
+
+Users.sync();
+Servers.sync();
+Channels.sync();
+Messages.sync();
+Media.sync();
+Belong.sync();
 
 module.exports = {
   sequelize,

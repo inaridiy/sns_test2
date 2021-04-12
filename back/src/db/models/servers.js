@@ -9,15 +9,9 @@ module.exports = (sequelize) => {
       user_id: {
         type: Sequelize.STRING,
         allowNull: false,
-        references: { model: "users", key: "id" }, // 外部キー
-        onUpdate: "cascade",
-        onDelete: "cascade",
       },
       icon: {
         type: Sequelize.INTEGER,
-        references: { model: "users", key: "id" }, // 外部キー
-        onUpdate: "cascade",
-        onDelete: "cascade",
       },
     },
     {
@@ -25,7 +19,7 @@ module.exports = (sequelize) => {
     }
   );
 
-  Servers.sync();
+  //Servers.sync();
 
   return { Servers };
 };

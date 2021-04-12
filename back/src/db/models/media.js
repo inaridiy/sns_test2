@@ -8,13 +8,10 @@ module.exports = (sequelize) => {
     user_id: {
       type: Sequelize.STRING,
       allowNull: false,
-      references: { model: "users", key: "id" }, // 外部キー
-      onUpdate: "cascade",
-      onDelete: "cascade",
     },
   });
 
-  Media.sync();
+  //  Media.sync();
 
   return { Media };
 };

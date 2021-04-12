@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
     },
   });
 
-  Belong.sync();
+  //Belong.sync();
 
   return { Belong };
 };

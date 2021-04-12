@@ -6,25 +6,16 @@ module.exports = (sequelize) => {
     text: { type: Sequelize.STRING },
     channel_id: {
       type: Sequelize.INTEGER,
-      references: { model: "channels", key: "id" }, // 外部キー
-      onUpdate: "cascade",
-      onDelete: "cascade",
     },
     media_id: {
       type: Sequelize.INTEGER,
-      references: { model: "media", key: "id" }, // 外部キー
-      onUpdate: "cascade",
-      onDelete: "cascade",
     },
     user_id: {
       type: Sequelize.STRING,
-      references: { model: "users", key: "id" }, // 外部キー
-      onUpdate: "cascade",
-      onDelete: "cascade",
     },
   });
 
-  Messages.sync();
+  // Messages.sync();
 
   return { Messages };
 };

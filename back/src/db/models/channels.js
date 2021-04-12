@@ -9,10 +9,6 @@ module.exports = (sequelize) => {
       type: { type: Sequelize.INTEGER },
       server_id: {
         type: Sequelize.INTEGER,
-        references: { model: "servers", key: "id" }, // 外部キー
-        allowNull: false,
-        onUpdate: "cascade",
-        onDelete: "cascade",
       },
     },
     {
@@ -20,7 +16,7 @@ module.exports = (sequelize) => {
     }
   );
 
-  Channels.sync();
+  //Channels.sync();
 
   return { Channels };
 };

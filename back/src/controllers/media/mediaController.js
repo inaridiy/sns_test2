@@ -17,11 +17,8 @@ module.exports.mediaUpload = async (req, res, next) => {
   let mediaData = {};
 
   if (file.type.match(/image/g)) {
-    const imgPath = path.join(
-      __dirname,
-      "../../../medias/images/",
-      create_privateid(12) + ".webp"
-    );
+    const name = create_privateid(12) + ".webp";
+    const imgPath = path.join(__dirname, "../../../medias/images/", name);
 
     const imgPromise = sharp(file.path)
       .resize({
@@ -45,7 +42,7 @@ module.exports.mediaUpload = async (req, res, next) => {
         })
       )[1];
 
-      mediaData = { id, type };
+      mediaData = { id, type, path: "/images/" + name };
       await unlink(file.path);
     } catch (e) {
       next({ Stack: e, msg: "imageProcess Error", statusCode: 500 });
