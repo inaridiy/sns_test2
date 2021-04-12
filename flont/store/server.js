@@ -6,6 +6,20 @@ export const state = () => ({
   users: {}
 });
 
+export const getters = {
+  getMessages: state => channel_id => {
+    const msgArray =
+      state.message && Object.values(state.messages[channel_id]).length
+        ? Object.values(state.messages[channel_id])
+        : [];
+    return msgArray
+      ? msgArray.sort((a, b) => {
+          new Date(b.updatedAt) - new Date(a.updatedAt);
+        })
+      : [];
+  }
+};
+
 export const mutations = {
   setServerData(state, data) {
     state.servers = data;

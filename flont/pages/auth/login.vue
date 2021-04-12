@@ -51,15 +51,15 @@ export default {
         this.error = "すべての欄に入力してね";
         return;
       }
-
-      this.$auth
-        .loginWith("local", {
+      try {
+        await this.$auth.loginWith("local", {
           data: this.user
-        })
-        .catch(e => {
-          this.error = "パスワードまたはEmailが間違ってます";
-          this.disabled = false;
         });
+        this.$router.push("/channel");
+      } catch (e) {
+        this.error = "パスワードまたはEmailが間違ってます";
+        this.disabled = false;
+      }
     }
   }
 };
