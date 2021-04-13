@@ -7,7 +7,7 @@
         <v-card-actions>
           <v-btn class="info" @click="submit" :disabled="disabled"
             >ログイン</v-btn
-          >
+          >または<nuxt-link to="/auth/register">登録する</nuxt-link>
         </v-card-actions>
       </v-form>
     </form-card>
