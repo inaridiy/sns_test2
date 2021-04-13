@@ -10,6 +10,7 @@ const {
 const {
   getServerData,
   createServer,
+  updateServer,
 } = require("../../src/controllers/management/serverController");
 const {
   getInvitationToken,
@@ -24,7 +25,11 @@ router
   .post(isAuth, createChannel)
   .delete(deleteChannel);
 
-router.route("/server").get(getServerData).post(isAuth, createServer);
+router
+  .route("/server")
+  .get(getServerData)
+  .post(isAuth, createServer)
+  .put(isAuth, updateServer);
 
 router.route("/invitation").get(isAuth, getInvitationToken);
 

@@ -13,7 +13,7 @@ module.exports.getChannelData = async (req, res, next) => {
 };
 
 module.exports.createChannel = async (req, res, next) => {
-  const { server_id, name = "無名のチャンネル", type = "text" } = req.query,
+  const { server_id, name = "無名のチャンネル", type = "text" } = req.body,
     userData = req.user;
   if (!server_id) {
     return res.status(400).json({

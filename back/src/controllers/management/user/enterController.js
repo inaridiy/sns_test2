@@ -4,7 +4,7 @@ const { Servers, Belong } = require("../../../db/models"),
 const jwt = require("jsonwebtoken");
 
 module.exports.enterServer = async (req, res, next) => {
-  const { token } = req.query;
+  const { token } = req.body;
   try {
     const tokenData = await new Promise((resolve, reject) => {
       jwt.verify(token, jwtconfig.secretKey, (err, data) => {

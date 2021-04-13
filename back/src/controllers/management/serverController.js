@@ -16,7 +16,7 @@ module.exports.getServerData = async (req, res, next) => {
 };
 
 module.exports.createServer = async (req, res, next) => {
-  const { name = "無名のサーバー" } = req.query,
+  const { name = "無名のサーバー" } = req.body,
     { id: user_id } = req.user;
   try {
     const server = await Servers.create({ name, user_id }).catch((e) => {
@@ -56,7 +56,7 @@ module.exports.deleteChannel = async (req, res, next) => {
 };
 
 module.exports.updateServer = async (req, res, next) => {
-  const { server_id, name, icon } = req.query;
+  const { server_id, name, icon } = req.body;
   try {
     await Servers.findByPk(server_id).then((server) => {
       (server.name = name), (server.icon = icon);

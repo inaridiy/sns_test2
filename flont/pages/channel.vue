@@ -2,6 +2,7 @@
   <div>
     <AppBar />
     <Navi />
+    <MembersNavi />
     <nuxt-child />
   </div>
 </template>
@@ -9,10 +10,11 @@
 <script>
 import Navi from "~/components/navi/Navi";
 import AppBar from "~/components/bar/AppBar";
+import MembersNavi from "~/components/navi/MembersNavi";
 
 import { mapState, mapMutations, mapActions } from "vuex";
 export default {
-  components: { Navi, AppBar },
+  components: { Navi, AppBar, MembersNavi },
   data: () => ({ drawer: true, channels: [] }),
   async mounted() {
     await this.setup();

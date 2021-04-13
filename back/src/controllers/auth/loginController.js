@@ -35,6 +35,6 @@ module.exports.loginC = async function (req, res, next) {
     name: userData.name,
     icon: userData.icon,
   };
-  const token = jwt.sign(payload, jwtconfig.secretKey);
+  const token = jwt.sign(payload, jwtconfig.secretKey, { expiresIn: "30d" });
   return res.json({ token });
 };

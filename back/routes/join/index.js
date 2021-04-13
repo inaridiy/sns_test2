@@ -9,6 +9,6 @@ const {
   leaveServer,
 } = require("../../src/controllers/management/user/leaveController");
 
-router.route("/join").post(isAuth, enterServer).delete(isAuth, leaveServer);
+router.route("/").post(isAuth, enterServer).delete(isAuth, leaveServer);
 
 module.exports = router;

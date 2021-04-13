@@ -1,22 +1,16 @@
+import Vue from "vue";
 export const state = () => ({
   servers: {},
   setuped: false,
   messages: {},
   server: {},
-  users: {}
+  users: {},
+  test: []
 });
 
 export const getters = {
-  getMessages: state => channel_id => {
-    const msgArray =
-      state.message && Object.values(state.messages[channel_id]).length
-        ? Object.values(state.messages[channel_id])
-        : [];
-    return msgArray
-      ? msgArray.sort((a, b) => {
-          new Date(b.updatedAt) - new Date(a.updatedAt);
-        })
-      : [];
+  getUsers: state => {
+    return state.users || [];
   }
 };
 
@@ -30,33 +24,42 @@ export const mutations = {
   setMessageChannels(state, data) {
     state.messages[data] = {};
   },
-  addMessages(state, data) {
-    state.messages[data.channel_id][data.id] = data;
+  addMessages(state, msg) {
+    state.messages = {
+      ...state.messages,
+      [msg.channel_id]: { ...state.messages[msg.channel_id], [msg.id]: msg }
+    };
   },
   addMessagesBulk(state, data) {
-    data.rows.forEach(msg => (state.messages[msg.channel_id][msg.id] = msg));
+    data.rows.forEach(
+      msg =>
+        (state.messages = {
+          ...state.messages,
+          [msg.channel_id]: { ...state.messages[msg.channel_id], [msg.id]: msg }
+        })
+    );
   },
   setServer(state, server_id) {
     const server = state.servers[server_id];
     state.server = server;
   },
   setUsers(state) {
-    for (server of Object.values(state.servers)) {
-      for (user of server.belongs) {
-        state.users[user.user_id] = user.user;
-      }
-    }
+    Object.values(state.servers).forEach(server => {
+      const temp = [];
+      server.belongs.forEach(user => {
+        temp.push(user.user);
+      });
+      state.users = { ...state.users, [server.id]: temp };
+    });
   }
 };
 
 export const actions = {
   async setup({ rootState, commit, state, dispatch }) {
-    if (!rootState.auth.user.id) {
-      return;
-    }
     if (!state.setuped) {
       await dispatch("getAllServerData");
       await dispatch("subscribeMessage");
+      commit("setUsers");
       commit("setupDone");
     }
   },
@@ -97,7 +100,6 @@ export const actions = {
       .catch(e => {
         console.log(e.response);
       });
-    console.log(messages);
     commit("addMessagesBulk", messages);
   }
 };

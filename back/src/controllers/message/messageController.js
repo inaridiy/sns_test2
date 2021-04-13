@@ -42,7 +42,6 @@ module.exports.postMessage = async (req, res, next) => {
 
 module.exports.getMessage = async (req, res, next) => {
   const { channel_id, page = 1 } = req.query;
-  console.log(req.query);
   if (!channel_id) {
     return res.status(400).json({
       message: "",

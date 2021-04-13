@@ -31,6 +31,7 @@ import FormCard from "~/components/form/formCard.vue";
 import PasswordInput from "~/components/form/passwordInput.vue";
 
 export default {
+  auth: false,
   components: { emailInput, PasswordInput, FormCard },
   data() {
     return {
