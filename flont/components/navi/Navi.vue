@@ -15,32 +15,7 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title
-            >{{ server.name }}
-            <v-menu offset-y open-on-hover>
-              <template v-slot:activator="{ on, attrs }"
-                ><v-btn icon v-bind="attrs" v-on="on">
-                  <v-icon small v-if="server.user_id === $auth.user.id"
-                    >mdi-dots-vertical</v-icon
-                  >
-                </v-btn>
-              </template>
-              <v-list>
-                <v-list-item-group>
-                  <v-list-item :to="`/management/user/invitation/${server.id}`"
-                    ><v-list-item-content>
-                      <v-list-item-title>招待する</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item :to="`/management/server/${server.id}`"
-                    ><v-list-item-content>
-                      <v-list-item-title>設定</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list>
-            </v-menu></v-list-item-title
-          >
+          <v-list-item-title>{{ server.name }} </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
