@@ -37,7 +37,9 @@ export default {
     "@nuxtjs/pwa",
     "@nuxtjs/auth-next"
   ],
-
+generate: {
+    fallback: true
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: { baseURL: process.env.API_URL || "http://localhost:4000" },
 
