@@ -5,7 +5,12 @@
     <v-app-bar-title>{{ server.name }}</v-app-bar-title>
 
     <v-spacer></v-spacer>
-
+    <v-btn depressed :to="`/management/user/invitation/${server.id}`">
+      招待
+    </v-btn>
+    <v-btn depressed :to="`/management/server/${server.id}`">
+      設定
+    </v-btn>
     <v-dialog
       v-model="dialog"
       width="500"
